@@ -1,0 +1,52 @@
+class Solution {
+public:
+int pivot(vector<int>& arr,int n)  //to get the pivot element
+{
+    int s=0;
+    int e=n-1;
+    int m=s+(e-s)/2;
+    while(s<e)
+    {
+        if(arr[m]>=arr[0])
+        {
+            s=m+1;
+        }
+        else
+        e=m;
+         m=s+(e-s)/2;
+    }
+    return s;
+    
+}
+int bs(vector<int>& arr1,int start,int end,int k)   // simple binary search
+{
+    int s=start;
+    int e=end;
+    
+     while(s<=e)
+     {
+         int m=s+(e-s)/2;
+         if(arr1[m]==k)
+         {
+             return m;
+         }
+         if(k>arr1[m])
+         {
+             s=m+1;
+         }
+         else
+         e=m-1;
+     }
+     return -1;
+}
+
+    int search(vector<int>& nums, int target) {
+        int si = nums.size();
+        int piv = pivot(nums,si);
+        if(target>=nums[piv]&&target<=nums[si-1])
+        return bs(nums,piv,si-1,target);
+        else
+        return bs(nums,0,piv-1,target);
+        
+    }
+};

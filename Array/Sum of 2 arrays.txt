@@ -1,0 +1,52 @@
+// Given arr1 and arr2 , add these 2 arrays and return the sum in third array
+
+
+ 
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int arr1[]={6,6,6};
+    int n1=sizeof(arr1)/sizeof(int);
+    int arr2[]={6,6,6};
+    int n2=sizeof(arr2)/sizeof(int);
+    int sum=0;int carry=0;
+    n1--;
+    n2--;
+    vector<int>ans;
+    while(n1>=0&&n2>=0)
+    {
+        sum=arr1[n1]+arr2[n2]+carry;
+        int val=sum%10;
+        carry=sum/10;
+        ans.push_back(val);
+        n2--;n1--;
+    }
+    while(n2>=0)
+    {
+        sum=arr2[n2]+carry;
+        int val1=sum%10;
+        carry=sum/10;
+        ans.push_back(val1);
+        n2--;
+    }
+    while(n1>=0)
+    {
+        sum=arr1[n1]+carry;
+         int val2=sum%10;
+         carry=sum/10;
+        ans.push_back(val2);
+        n1--;
+    }
+    if(carry>0)
+    ans.push_back(carry);
+    reverse(ans.begin(),ans.end());
+    for(int i=0;i<ans.size();i++)
+    cout<<ans[i]<<" ";
+    
+
+   
+}

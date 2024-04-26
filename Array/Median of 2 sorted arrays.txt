@@ -1,0 +1,47 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m=nums1.size();
+        int n =nums2.size();
+        vector<int>arr3;
+        int flag=0;
+    int start1=0;
+    int start2=0;
+    // inserting into 3rd vector in sorted manner
+    while(start1<m&&start2<n)
+    {
+        if(nums1[start1]<nums2[start2])
+        arr3.push_back(nums1[start1++]);
+        else 
+        arr3.push_back(nums2[start2++]);
+        
+    }
+    // inserting remaining elements of first vector
+    while(start1<m)
+    {
+        arr3.push_back(nums1[start1++]);
+    }
+    //inserting remaining elements of second vector 
+    while(start2<n)
+    {
+    arr3.push_back(nums2[start2++]);
+    }
+    double median;
+    //if third vector has even size
+    if((n+m)%2==0)
+    {
+        
+        int even1=(n+m)/2 -1;
+        int even2=even1+1;
+        median=(arr3[even1]+arr3[even2])/2.0;
+    }
+    else  
+    {
+    int odd1=(n+m)/2-1;
+    odd1++;
+    median=(arr3[odd1])/1.0;
+    }
+return median;
+        
+    }
+};

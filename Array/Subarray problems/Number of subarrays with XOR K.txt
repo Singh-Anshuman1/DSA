@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[]={4,2,2,6,4};
+    int k;
+    cout<<"ENTER VALUE OF K\n";
+    cin>>k;
+    map<int,int>hash; //one for storing value and other for count
+     hash[0]++;
+     int XOR=0;
+     int count=0;
+     for(int i=0;i<sizeof(arr)/sizeof(int);i++)
+     {
+         XOR=XOR^arr[i];
+         int x=XOR^k;
+         count+=hash[x];
+         hash[XOR]++;
+     }
+     cout<<count;
+}

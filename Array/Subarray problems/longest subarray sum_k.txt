@@ -1,0 +1,27 @@
+class Solution{
+    public:
+    int lenOfLongSubarr(int A[],  int N, int K) 
+    { 
+        map<int,int>prefixSum;
+        int sum=0;
+        int maxLen=0;
+        for(int i=0;i<N;i++)
+        {
+        sum+=A[i];
+        if(sum==K)
+        maxLen=i+1;
+        int rem=sum-K;
+        if(prefixSum.find(rem)!=prefixSum.end())
+        {
+            int len=abs(prefixSum[rem]-i);
+            maxLen=max(maxLen,len);
+        }
+        if(prefixSum.find(sum)==prefixSum.end())
+        {
+            prefixSum[sum]=i;
+        }
+        }
+        return maxLen;
+    } 
+
+};

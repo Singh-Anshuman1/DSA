@@ -1,0 +1,54 @@
+//You are given an array consisting of n integers which denote the position of a stall. You are also given an integer k which denotes the number of aggressive cows. You are given the task of assigning stalls to k cows such that the minimum distance between any two of them is the maximum possible.
+ 
+
+
+
+#include <iostream>
+using namespace std;
+bool isPossible(int arr[],int k,int mid,int n)
+{
+    int cows =1;
+    int lastpos=arr[0];
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]-lastpos>=mid)            // if success then cow is placed at the positon
+        {
+            cows++;
+            if(cows==k)
+            return true;
+            lastpos=arr[i];
+        }
+    }
+    
+    return false;
+   
+}
+int main()
+{
+int arr[]={1,2,5,7,10}; // positons of stall considering array is sorted
+int n=sizeof(arr)/sizeof(int);
+int k=3;                 // number of cows
+int max=-1;
+int start=0;
+int ans=-1;
+for(int i=0;i<n;i++)
+{
+    if(arr[i]>max)
+    max=arr[i];
+    
+}
+int end=max;         // search space of binary search is 0 to max positon of stall
+int mid=start+(end-start)/2;
+while(start<=end)
+{
+    if(isPossible(arr,k,mid,n))
+    {
+        ans=mid;
+        start=mid+1;
+    }
+    else
+    end=mid-1;
+    mid=start+(end-start)/2;
+}
+cout<<ans;
+}

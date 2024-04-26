@@ -1,0 +1,33 @@
+class Solution {
+public:
+long long binary(int x)
+{
+    long long start=0;
+    long long end=x;
+    long long ans=-1;
+   long long mid=start+(end-start)/2;
+   
+    while(start<=end)
+    {
+        long long square=mid*mid;
+        if(square==x)
+        {
+            return mid;
+        }
+        if(square>x)
+        {
+            end=mid-1;
+        }
+        else
+        {
+            ans=mid;
+            start=mid+1;
+        }
+        mid=start+(end-start)/2;
+    }
+    return ans;
+}
+    int mySqrt(int x) {
+        return binary(x);
+    }
+};

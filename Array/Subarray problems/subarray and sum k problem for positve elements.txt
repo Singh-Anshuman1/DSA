@@ -1,0 +1,27 @@
+//if array has positve elements only then the optimal soln is using two pointer approach
+
+class Solution{
+    public:
+    int lenOfLongSubarr(int A[],  int N, int K) 
+    { 
+        int left=0;
+        int right=0;
+        int maxLen=0;
+        int sum=A[0];
+        while(right<N)
+        {
+            while(sum>K&&left<=right)
+            {
+                sum-=A[left];
+                left++;
+            }
+            if(sum==K)
+            maxLen=max(maxLen,right-left+1);
+            right++;
+            if(right<N)
+            sum+=A[right];
+        }
+        return maxLen;
+    } 
+
+};

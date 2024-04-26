@@ -1,0 +1,60 @@
+//Given an unsorted integer array nums, return the smallest missing positive integer.
+
+You must implement an algorithm that runs in O(n) time and uses O(1) auxiliary space.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,0]
+Output: 3
+Explanation: The numbers in the range [1,2] are all in the array.
+Example 2:
+
+Input: nums = [3,4,-1,1]
+Output: 2
+Explanation: 1 is in the array but 2 is missing.
+
+
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n=nums.size();
+        int flag=n+2;
+//ignoring all the elements not in range 
+for(int i=0;i<n;i++)
+{
+    if(nums[i]<=0)
+    nums[i]=flag;
+}
+
+
+for(int i=0;i<n;i++)
+{
+   
+    int ch=nums[i];
+    ch=abs(ch);
+    if(ch>=1&&ch<=n)
+    {
+        
+        int x=abs(nums[ch-1]);
+        nums[ch-1]=-x;
+    }
+    
+}
+int flag1=0;
+for(int i=0;i<n;i++)
+{
+    if(nums[i]>0)
+    {
+    flag1=i+1;
+    break;
+    }
+}
+if(flag1==0)
+return n+1;
+else
+return flag1;
+    }
+};

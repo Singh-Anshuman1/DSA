@@ -1,0 +1,28 @@
+// Given an array find if the frequency of occurence of all the elements is unique 
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        unordered_map<int, int> mp;
+        
+        // Count the frequencies of each element
+        for (int num : arr) {
+            mp[num]++;
+        }
+        
+        vector<int>vec;
+  for(auto x:mp)
+  vec.push_back(x.second);
+  int N=vec.size();
+ for(int i=0;i<N-1;i++)
+ {
+     for(int j=i+1;j<N;j++)
+     {
+         if(vec[i]==vec[j])
+         return false;
+         
+     }
+ }
+return true;
+}
+};

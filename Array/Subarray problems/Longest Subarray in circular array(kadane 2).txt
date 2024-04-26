@@ -1,0 +1,45 @@
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+class Solution {
+public:
+    int kadane(vector<int>& nums) {
+        int max1 = INT_MIN;
+        int max2 = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            max2 += nums[i];
+            max1 = max(max2, max1);
+            if (max2 < 0)
+                max2 = 0;
+        }
+        return max1;
+    }
+
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int flag =0;int max3=INT_MIN;    
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>0)
+            flag=1;
+            max3=max(max3,nums[i]);
+
+        }
+        if(flag==0)
+        return max3; // edge case kadane fail if all elements are negative
+        int n = nums.size();
+        vector<int> nums1(n); // Resize nums1 to the same size as nums
+        int array_sum = 0;
+        for (int i = 0; i < n; i++) {
+            nums1[i] = -nums[i]; // Assign negative values to nums1
+            array_sum += nums[i];
+        }
+        int l = kadane(nums1);
+        l = -l;
+        int max1 = array_sum - l;
+        int max2 = kadane(nums);
+        return max(max1, max2);
+    }
+};

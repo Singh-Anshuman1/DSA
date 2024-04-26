@@ -1,0 +1,57 @@
+class Solution {
+public:
+    bool canArrange(vector<int>& arr, int k) {
+        unordered_map<int,int>mp;
+        for(int i=0;i<arr.size();i++)
+        {
+            int mod = arr[i] % k;
+            if (mod < 0)
+            {
+                mod += k;
+            }
+            mp[mod]++;
+        }
+        int ans = 0;
+        for(int i=0;i<arr.size();i++)
+        {
+            int rem = arr[i] % k;
+            if (rem < 0)
+            {
+                rem += k;
+            }
+            int comp = k - rem;
+            if (rem == 0 && mp[0] > 0)
+            {
+                if (mp[0] % 2 == 0)
+                {
+                    ans += mp[0] / 2;
+                    mp[0] = 0;
+                }
+            }
+            if(comp==rem)
+            {
+                int l=mp[comp];
+                ans+=l/2;
+                mp[comp]-=l;
+            }
+            if (mp[comp] > 0 && comp!=rem)
+            {
+                int l = mp[rem];
+                if (mp[comp] == l)
+                {
+                    ans += l;
+                    mp[rem] = mp[rem] - l;
+                    mp[comp] = mp[comp] - l;
+                }
+            }
+        }
+        if (ans == arr.size() / 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};

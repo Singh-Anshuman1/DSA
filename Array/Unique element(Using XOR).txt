@@ -1,0 +1,18 @@
+// Finding an element in an array which is unique works only if 1 element is unique and rest must have duplicates
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int arr []={1,2,3,2,2,3,2,1,4,5,5};
+  int size=sizeof(arr)/sizeof(int);
+  int ans=0;
+  for(int i=0;i<size;i++)
+  {
+      ans=ans^arr[i];
+  }
+  cout<<"THE UNIQUE ELEMENT IS\n"<<ans;
+}
